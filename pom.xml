@@ -45,6 +45,12 @@
             <name>Eirik Sletteberg</name>
             <email>eiriksletteberg@gmail.com</email>
         </developer>
+
+        <developer>
+            <id>brucebao</id>
+            <name>Bruce Bao</name>
+            <email>bruceb.cd@gmail.com</email>
+        </developer>
     </developers>
 
     <modules>
@@ -67,4 +73,46 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>sie-snapshot</id>
+            <name>SIE SNAPSHOTS</name>
+            <url>http://192.168.1.108:8081/repository/sie-snapshot/</url>
+        </snapshotRepository>
+
+        <repository>
+            <id>sie-release</id>
+            <name>SIE RELEASE</name>
+            <url>http://192.168.1.108:8081/repository/sie-release/</url>
+        </repository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <name>Nexus Repository</name>
+            <url>http://192.168.1.108:8081/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus</id>
+            <name>Nexus Repository</name>
+            <url>http://192.168.1.108:8081/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 </project>

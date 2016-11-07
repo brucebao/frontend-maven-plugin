@@ -14,6 +14,8 @@ final class InstallNodeExecutorConfig implements NodeExecutorConfig {
   private static final String NODE_WINDOWS = NodeInstaller.INSTALL_PATH.replaceAll("/", "\\\\") + "\\node.exe";
   private static final String NODE_DEFAULT = NodeInstaller.INSTALL_PATH + "/node";
   private static final String NPM = NodeInstaller.INSTALL_PATH + "/node_modules/npm/bin/npm-cli.js";
+  private static final String NPM_NEW = NodeInstaller.INSTALL_PATH + "/node_modules/%s/bin/npm-cli.js";
+  private static final String NPM_PARENT = NodeInstaller.INSTALL_PATH + "/node_modules/";
 
   private final InstallConfig installConfig;
 
@@ -29,6 +31,22 @@ final class InstallNodeExecutorConfig implements NodeExecutorConfig {
 
   @Override
   public File getNpmPath() {
+    File file = new File(installConfig.getInstallDirectory() + Utils.normalize(NPM_PARENT));
+    if (file != null && file.exists()) {
+      String[] list = file.list();
+      String npmDirName = null;
+      for (String fileName: list) {
+        if (fileName.matches("^npm-[0-9\\.]+$")) {
+          npmDirName = fileName;
+          break;
+        }
+      }
+
+      if (npmDirName != null) {
+        return new File(installConfig.getInstallDirectory() + Utils.normalize(String.format(NPM_NEW, npmDirName)));
+      }
+    }
+
     return new File(installConfig.getInstallDirectory() + Utils.normalize(NPM));
   }
 

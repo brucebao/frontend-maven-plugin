@@ -115,7 +115,14 @@ public class NPMInstaller {
     private void installNpm() throws InstallationException {
         try {
             this.logger.info("Installing npm version {}", this.npmVersion);
-            final String downloadUrl = this.npmDownloadRoot + "npm-" + this.npmVersion + ".tgz";
+
+            // taobao npm mirrors no "npm-" prefix
+            String dUrl = this.npmDownloadRoot + "npm-" + this.npmVersion + ".tgz";
+            if (this.npmDownloadRoot.contains("npm.taobao.org/mirrors/npm/")) {
+                dUrl = this.npmDownloadRoot + this.npmVersion + ".tar.gz";;
+            }
+
+            final String downloadUrl = dUrl;
 
             CacheDescriptor cacheDescriptor = new CacheDescriptor("npm", this.npmVersion, "tar.gz");
 

@@ -29,6 +29,7 @@
                         <configuration>
                             <nodeVersion>v6.9.1</nodeVersion>
                             <yarnVersion>v0.16.1</yarnVersion>
+                            <nodeDownloadRoot>https://npm.taobao.org/mirrors/node/</nodeDownloadRoot>
                         </configuration>
                     </execution>
 
